@@ -33,17 +33,33 @@ class MainActivity : AppCompatActivity() {
         //display the name of the country
         questionNumber = findViewById(R.id.QuestionNumber)
         text = findViewById(R.id.CountryName)
-        //
         radioGroup = findViewById(R.id.optionsRadioGroup)
         button = findViewById(R.id.Check_button)
-        Choeses()
+        driver()
+        listener()
+    }
+    /**
+      * Function to setup a Listener for the multiple choose
+      * it will highlight the selected only
+    */
+    private fun listener() {
         var prevSelectedRadioButton: RadioButton? = null
         //highlight the selected answer by changing the background color
         radioGroup.setOnCheckedChangeListener { group, checkedId ->
             val checkedRadioButton = group.findViewById<RadioButton>(checkedId)
             if (checkedRadioButton != null) {
-                checkedRadioButton.setBackgroundColor(ContextCompat.getColor(this, R.color.teal_200))
-                prevSelectedRadioButton?.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent))
+                checkedRadioButton.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.teal_200
+                    )
+                )
+                prevSelectedRadioButton?.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        android.R.color.transparent
+                    )
+                )
                 prevSelectedRadioButton = checkedRadioButton
             }
         }
@@ -80,10 +96,11 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("score", score)
             startActivity(intent)
         }
-        Choeses()
+        driver()
+        listener()
     }
     @SuppressLint("SetTextI18n")
-    fun Choeses(){
+    fun driver(){
         // confirm if the answer have been checked
         if (checkAnswer) {
             //give the option to check in the button
@@ -156,6 +173,8 @@ class MainActivity : AppCompatActivity() {
         }
         //update score
         questionNumber.text = "QuestionNumber: ${questionNum.toString()}/10\t\t\t\t\t\t\t\t Score: ${score.toString()}"
+        //restart the radioGroup Listener
+        radioGroup.setOnCheckedChangeListener(null)
     }
 
 }
