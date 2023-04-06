@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context=".MainActivity">
+    tools:context=".EndScreen">
 
 
     <TextView
@@ -20,9 +20,15 @@
         android:id="@+id/score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You Finished"
+        android:text="score"
         android:textSize="50sp"/>
 
+    <Button
+        android:id="@+id/start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="mainMenu"
+        android:text="@string/main_menu" />
 
 
 </LinearLayout>

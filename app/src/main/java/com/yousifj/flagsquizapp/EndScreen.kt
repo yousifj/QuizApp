@@ -1,7 +1,9 @@
 package com.yousifj.flagsquizapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 
 class EndScreen : AppCompatActivity() {
@@ -13,5 +15,9 @@ class EndScreen : AppCompatActivity() {
         val score = intent.getIntExtra("score", 0)
         text = findViewById(R.id.score)
         text.text = "You score is: ${score.toString()}"
+    }
+    fun mainMenu(view: View){
+        val intent = Intent(this, MainMenu::class.java)
+        startActivity(intent)
     }
 }

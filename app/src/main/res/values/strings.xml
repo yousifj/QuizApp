@@ -2,4 +2,8 @@
     <string name="app_name">Flags Quiz App</string>
     <string name="an_image_of_the_flag">An Image of the flag</string>
     <string name="which_country_does_this_flag_belong_to">Which country does this flag belong to?</string>
+    <string name="start_quiz">Start Quiz</string>
+    <string name="exit">Exit</string>
+    <string name="welcome">Welcome</string>
+    <string name="main_menu">Main Menu</string>
 </resources>
