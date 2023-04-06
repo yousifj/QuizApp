@@ -20,12 +20,15 @@ class MainActivity : AppCompatActivity() {
 
     //globe variables
     private var checkAnswer = true
+    private var wavy = false
     private var countryCode = "us"
     private var questionNum = 0
     private var score = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //get type of flag from settings
+        wavy = intent.getBooleanExtra("wavy", false)
         //select a random county
         val countryCode = getRandomISO3166()
         //display the flag
@@ -68,11 +71,15 @@ class MainActivity : AppCompatActivity() {
     //function that will get a flag of a country given the ISO3166 code of that country
     private fun getFlagImage(countryCode: String) {
         imageView = findViewById(R.id.flagImageView)
-        //flag API documentations https://flagpedia.net/download/api
-        //wavy
-        //val flagUrl = "https://flagcdn.com/256x192/$countryCode.png"
-        //normal
-        val flagUrl = "https://flagcdn.com/h120/$countryCode.png"
+        var flagUrl  = ""
+        flagUrl = if (wavy){
+            //flag API documentations https://flagpedia.net/download/api
+            //wavy
+            "https://flagcdn.com/256x192/$countryCode.png"
+        }else{
+            //normal
+            "https://flagcdn.com/h120/$countryCode.png"
+        }
 
         // Use a library like Glide to load the image into an ImageView
         Glide.with(this)
@@ -94,6 +101,7 @@ class MainActivity : AppCompatActivity() {
         if(questionNum >= 10){
             val intent = Intent(this, EndScreen::class.java)
             intent.putExtra("score", score)
+            intent.putExtra("wavy", wavy)
             startActivity(intent)
         }
         driver()
