@@ -3,6 +3,8 @@ package com.yousifj.flagsquizapp
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.ContextMenu
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -40,7 +42,36 @@ class MainActivity : AppCompatActivity() {
         button = findViewById(R.id.Check_button)
         driver()
         listener()
+        //register the context menu
+        val myView = findViewById<View>(R.id.activity_main)
+        registerForContextMenu(myView)
     }
+
+    override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        menuInflater.inflate(R.menu.my_context_menu, menu)
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.flat -> {
+                var prevValue = wavy
+                wavy = false
+                getFlagImage(countryCode)
+                wavy = prevValue
+                return true
+            }
+            R.id.wavy -> {
+                var prevValue = wavy
+                wavy = true
+                getFlagImage(countryCode)
+                wavy = prevValue
+                return true
+            }
+            else -> return super.onContextItemSelected(item)
+        }
+    }
+
     /**
       * Function to setup a Listener for the multiple choose
       * it will highlight the selected only
@@ -107,12 +138,12 @@ class MainActivity : AppCompatActivity() {
         driver()
         listener()
     }
-    @SuppressLint("SetTextI18n")
-    fun driver(){
+
+    private fun driver(){
         // confirm if the answer have been checked
         if (checkAnswer) {
             //give the option to check in the button
-            button.text = "Check"
+            button.text = getString(R.string.Check)
             button.setBackgroundColor(ContextCompat.getColor(this, R.color.check_answer_color))
             checkAnswer = false
             questionNum ++
@@ -157,30 +188,29 @@ class MainActivity : AppCompatActivity() {
         }
         // condition when the answer needs to be checked
         else {
-            button.text = "Next"
+            button.text = getString(R.string.Next)
             button.setBackgroundColor(ContextCompat.getColor(this, R.color.next_question_color))
             checkAnswer = true
             val radioGroup = radioGroup
             val selectedRadioButtonId = radioGroup.checkedRadioButtonId
             // No radio button is selected
             if (selectedRadioButtonId == -1) {
-                text.text = "Incorrect"
+                val countryName = getCountryNameFromISO3166(countryCode)
+                text.text = getString(R.string.no_country_selected, countryName)
             } else {
                 val selectedRadioButton: RadioButton = findViewById(selectedRadioButtonId)
                 val selectedText = selectedRadioButton.text
                 if (selectedText.equals(getCountryNameFromISO3166(countryCode))) {
-                    text.text = "Correct"
                     score++
                     selectedRadioButton.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
                 } else {
                     selectedRadioButton.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
-                    text.text = "Wrong"
                 }
                 text.text = getCountryNameFromISO3166(countryCode)
             }
         }
         //update score
-        questionNumber.text = "QuestionNumber: ${questionNum.toString()}/10\t\t\t\t\t\t\t\t Score: ${score.toString()}"
+        questionNumber.text = getString(R.string.question_score_text, questionNum, score)
         //restart the radioGroup Listener
         radioGroup.setOnCheckedChangeListener(null)
     }

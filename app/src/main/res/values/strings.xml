@@ -6,4 +6,20 @@
     <string name="exit">Exit</string>
     <string name="welcome">Welcome</string>
     <string name="main_menu">Main Menu</string>
+    <string name="settings">Settings</string>
+    <string name="wavy_flag">Wavy flag</string>
+    <string name="Next">Next</string>
+    <string name="Check">Check</string>
+    <string name="question_score_text">QuestionNumber: %1$d/10\t\t\t\t\t\t\t\t\t Score: %2$d</string>
+    <string name="no_country_selected">Nothing selected, country is %1$s</string>
+    <string name="score_text">Your score is: %1$d</string>
+    <string name="exitWarning">Are you sure you want to exit?</string>
+    <string name="exitTitle">Exit Application</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="finished">You Finished</string>
+    <string name="score">score</string>
+    <string name="restart">restart</string>
+
+
 </resources>

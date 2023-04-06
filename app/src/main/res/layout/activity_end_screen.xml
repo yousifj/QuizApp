@@ -14,13 +14,13 @@
         android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You Finished"
+        android:text="@string/finished"
         android:textSize="50sp"/>
     <TextView
         android:id="@+id/score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="score"
+        android:text="@string/score"
         android:textSize="50sp"/>
 
     <Button

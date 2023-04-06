@@ -15,7 +15,7 @@ class EndScreen : AppCompatActivity() {
         wavy = intent.getBooleanExtra("wavy", false)
         val score = intent.getIntExtra("score", 0)
         text = findViewById(R.id.score)
-        text.text = "You score is: ${score.toString()}"
+        text.text = getString(R.string.score_text, score)
     }
     fun mainMenu(view: View){
         val intent = Intent(this, MainMenu::class.java)

@@ -23,10 +23,8 @@ class MainMenu : AppCompatActivity() {
         setContentView(R.layout.activity_main_menu)
         wavy = intent.getBooleanExtra("wavy", false)
 
-
         // Create a new instance of the MainFragment
         val mainFragment = MainFragment()
-
         // Use a FragmentTransaction to add the fragment to the activity
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container, mainFragment)
@@ -48,13 +46,13 @@ class MainMenu : AppCompatActivity() {
     //show alert when exit button is clicked
     fun showAlertDialog(view: View) {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Exit Application")
-        builder.setMessage("Are you sure you want to exit?")
-        builder.setPositiveButton("Yes") { _, _ ->
+        builder.setTitle(getString(R.string.exitTitle))
+        builder.setMessage(getString(R.string.exitWarning))
+        builder.setPositiveButton(getString(R.string.yes)) { _, _ ->
             //Exit the whole program is yes
             finishAffinity()
         }
-        builder.setNegativeButton("No") { dialog, _ ->
+        builder.setNegativeButton(getString(R.string.no)) { dialog, _ ->
             // close the alert dialog and do nothing in not confirmed
             dialog.cancel()
         }
@@ -80,8 +78,6 @@ class MainFragment : Fragment() {
 
 }
 class SettingsFragment : Fragment() {
-
-    private lateinit var checkBox: CheckBox
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
