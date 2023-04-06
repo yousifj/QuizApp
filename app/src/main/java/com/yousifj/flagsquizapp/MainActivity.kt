@@ -1,9 +1,11 @@
 package com.yousifj.flagsquizapp
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import java.util.*
 
@@ -11,12 +13,15 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     private lateinit var imageView: ImageView
     private lateinit var text: TextView
+    private lateinit var questionNumber: TextView
     private lateinit var button: Button
     private lateinit var WhichCountry: RadioGroup
 
     //globe variables
-    var checkanswer = true
-    var countryCode = "us"
+    private var checkAnswer = true
+    private var countryCode = "us"
+    private var questionNum = 0
+    private var score = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         //display the flag
         getFlagImage(countryCode)
         //display the name of the country
+        questionNumber = findViewById(R.id.QuestionNumber)
         text = findViewById(R.id.CountryName)
         text.text = getCountryNameFromISO3166(countryCode)
         WhichCountry = findViewById(R.id.optionsRadioGroup)
@@ -57,16 +63,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun buttonClick(view: View) {
+        //if the 10 questions have been asked end the quiz by going to a new activity
+        if(questionNum > 10){
+
+        }
         Choeses()
-
-        //Thread.sleep(2000)
     }
+    @SuppressLint("SetTextI18n")
     fun Choeses(){
-
-        if (checkanswer) {
+        // confirm if the answer have been checked
+        if (checkAnswer) {
+            //give the option to check in the button
             button.text = "Check"
-            checkanswer = false
-            //make a list without duplicates
+            checkAnswer = false
+            questionNum ++
+            //make a list of 4 countries without duplicates
             val numCountries = 4
             val countryCodes = mutableSetOf<String>()
             while (countryCodes.size < numCountries) {
@@ -77,34 +88,38 @@ class MainActivity : AppCompatActivity() {
             }
             val countryList = countryCodes.toList()
 
-            val option1CountryName = getCountryNameFromISO3166(countryList[0])
-            val option2CountryName = getCountryNameFromISO3166(countryList[1])
-            val option3CountryName = getCountryNameFromISO3166(countryList[2])
-            val option4CountryName = getCountryNameFromISO3166(countryList[3])
             // randomly chose one of them
             val randomIndex = Random().nextInt(4)
-            countryCode = countryList[randomIndex] // Replace with your desired country code
+            countryCode = countryList[randomIndex]
+            //display the flag
             getFlagImage(countryCode)
-            //For testing
-
+            //For testing only Display correct answer
             text.text = getCountryNameFromISO3166(countryCode)
 
             // Get the reference to the RadioGroup in your layout
             val radioGroup = WhichCountry
-
             // Assign the country names to each RadioButton in the RadioGroup
             radioGroup.getChildAt(0).findViewById<RadioButton>(R.id.option1RadioButton).text =
-                option1CountryName
+                getCountryNameFromISO3166(countryList[0])
             radioGroup.getChildAt(1).findViewById<RadioButton>(R.id.option2RadioButton).text =
-                option2CountryName
+                getCountryNameFromISO3166(countryList[1])
             radioGroup.getChildAt(2).findViewById<RadioButton>(R.id.option3RadioButton).text =
-                option3CountryName
+                getCountryNameFromISO3166(countryList[2])
             radioGroup.getChildAt(3).findViewById<RadioButton>(R.id.option4RadioButton).text =
-                option4CountryName
+                getCountryNameFromISO3166(countryList[3])
+            // clear checked
             radioGroup.clearCheck()
-        }else {
+            // clear background
+            for (i in 0 until radioGroup.childCount) {
+                val child = radioGroup.getChildAt(i)
+                child.background = null
+                // or use child.setBackgroundColor(Color.TRANSPARENT);
+            }
+        }
+        // condition when the answer needs to be checked
+        else {
             button.text = "Next"
-            checkanswer = true
+            checkAnswer = true
             val radioGroup = WhichCountry
             val selectedRadioButtonId = radioGroup.checkedRadioButtonId
             // No radio button is selected
@@ -115,12 +130,17 @@ class MainActivity : AppCompatActivity() {
                 val selectedText = selectedRadioButton.text
                 if (selectedText.equals(getCountryNameFromISO3166(countryCode))) {
                     text.text = "Correct"
+                    score++
+                    selectedRadioButton.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
                 } else {
+                    selectedRadioButton.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
                     text.text = "Wrong"
                 }
 
             }
         }
+        //update score
+        questionNumber.text = "QuestionNumber: ${questionNum.toString()}/10\t\t\t\t\t\t\t\t Score: ${score.toString()}"
     }
 
 }
