@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/background">
 
     <TextView
         android:id="@+id/QuestionNumber"
@@ -28,44 +29,54 @@
         android:id="@+id/CountryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/questionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/which_country_does_this_flag_belong_to" />
+        android:text="@string/which_country_does_this_flag_belong_to"
+        android:textSize="20sp"/>
 
     <RadioGroup
         android:id="@+id/optionsRadioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/cardview_light_background">
 
         <RadioButton
             android:id="@+id/option1RadioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Option 1" />
+            android:paddingLeft="20dp"
+            android:button="@null"
+            />
 
         <RadioButton
             android:id="@+id/option2RadioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Option 2" />
+            android:paddingLeft="20dp"
+            android:button="@null"
+            />
 
         <RadioButton
             android:id="@+id/option3RadioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Option 3" />
+            android:paddingLeft="20dp"
+            android:button="@null"
+            />
 
         <RadioButton
             android:id="@+id/option4RadioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Option 4" />
+            android:paddingLeft="20dp"
+            android:button="@null"
+            />
 
     </RadioGroup>
 

@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var text: TextView
     private lateinit var questionNumber: TextView
     private lateinit var button: Button
-    private lateinit var WhichCountry: RadioGroup
+    private lateinit var radioGroup: RadioGroup
 
     //globe variables
     private var checkAnswer = true
@@ -34,9 +34,19 @@ class MainActivity : AppCompatActivity() {
         questionNumber = findViewById(R.id.QuestionNumber)
         text = findViewById(R.id.CountryName)
         //
-        WhichCountry = findViewById(R.id.optionsRadioGroup)
+        radioGroup = findViewById(R.id.optionsRadioGroup)
         button = findViewById(R.id.Check_button)
         Choeses()
+        var prevSelectedRadioButton: RadioButton? = null
+        //highlight the selected answer by changing the background color
+        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            val checkedRadioButton = group.findViewById<RadioButton>(checkedId)
+            if (checkedRadioButton != null) {
+                checkedRadioButton.setBackgroundColor(ContextCompat.getColor(this, R.color.teal_200))
+                prevSelectedRadioButton?.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent))
+                prevSelectedRadioButton = checkedRadioButton
+            }
+        }
     }
 
     //function that will get a flag of a country given the ISO3166 code of that country
@@ -78,6 +88,7 @@ class MainActivity : AppCompatActivity() {
         if (checkAnswer) {
             //give the option to check in the button
             button.text = "Check"
+            button.setBackgroundColor(ContextCompat.getColor(this, R.color.check_answer_color))
             checkAnswer = false
             questionNum ++
             //make a list of 4 countries without duplicates
@@ -100,7 +111,7 @@ class MainActivity : AppCompatActivity() {
             text.text =""
 
             // Get the reference to the RadioGroup in your layout
-            val radioGroup = WhichCountry
+            val radioGroup = radioGroup
             // Assign the country names to each RadioButton in the RadioGroup
             radioGroup.getChildAt(0).findViewById<RadioButton>(R.id.option1RadioButton).text =
                 getCountryNameFromISO3166(countryList[0])
@@ -122,8 +133,9 @@ class MainActivity : AppCompatActivity() {
         // condition when the answer needs to be checked
         else {
             button.text = "Next"
+            button.setBackgroundColor(ContextCompat.getColor(this, R.color.next_question_color))
             checkAnswer = true
-            val radioGroup = WhichCountry
+            val radioGroup = radioGroup
             val selectedRadioButtonId = radioGroup.checkedRadioButtonId
             // No radio button is selected
             if (selectedRadioButtonId == -1) {
