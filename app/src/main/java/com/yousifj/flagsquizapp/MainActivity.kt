@@ -1,6 +1,7 @@
 package com.yousifj.flagsquizapp
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         //display the name of the country
         questionNumber = findViewById(R.id.QuestionNumber)
         text = findViewById(R.id.CountryName)
-        text.text = getCountryNameFromISO3166(countryCode)
+        //
         WhichCountry = findViewById(R.id.optionsRadioGroup)
         button = findViewById(R.id.Check_button)
         Choeses()
@@ -64,8 +65,10 @@ class MainActivity : AppCompatActivity() {
 
     fun buttonClick(view: View) {
         //if the 10 questions have been asked end the quiz by going to a new activity
-        if(questionNum > 10){
-
+        if(questionNum >= 10){
+            val intent = Intent(this, EndScreen::class.java)
+            intent.putExtra("score", score)
+            startActivity(intent)
         }
         Choeses()
     }
@@ -93,8 +96,8 @@ class MainActivity : AppCompatActivity() {
             countryCode = countryList[randomIndex]
             //display the flag
             getFlagImage(countryCode)
-            //For testing only Display correct answer
-            text.text = getCountryNameFromISO3166(countryCode)
+            //clear correct answer
+            text.text =""
 
             // Get the reference to the RadioGroup in your layout
             val radioGroup = WhichCountry
@@ -136,7 +139,7 @@ class MainActivity : AppCompatActivity() {
                     selectedRadioButton.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
                     text.text = "Wrong"
                 }
-
+                text.text = getCountryNameFromISO3166(countryCode)
             }
         }
         //update score
