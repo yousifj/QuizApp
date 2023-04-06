@@ -38,28 +38,24 @@ class MainMenu : AppCompatActivity() {
         //switch = view.findViewById(R.id.Wavyflag)
         // Set an OnClickListener on the Button to call openSettings
         settingsButton.setOnClickListener {
+            settingsButton.setVisibility(View.GONE)
             if (mainFragment.isAdded) {
                 mainFragment.openSettings(it)
-            } else {
-                // Handle the case where the fragment is not attached to the activity
-                Toast.makeText(this, "MainFragment is not attached to the activity", Toast.LENGTH_SHORT).show()
             }
         }
 
     }
+    //show alert when exit button is clicked
     fun showAlertDialog(view: View) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Exit Application")
         builder.setMessage("Are you sure you want to exit?")
         builder.setPositiveButton("Yes") { _, _ ->
-            // Show the button when the user clicks "Yes"
-            //button = findViewById(R.id.return_button)
-            //button.visibility = View.VISIBLE
-            //exit if yes
-            finish()
+            //Exit the whole program is yes
+            finishAffinity()
         }
         builder.setNegativeButton("No") { dialog, _ ->
-            // Does nothing for no
+            // close the alert dialog and do nothing in not confirmed
             dialog.cancel()
         }
         builder.create().show()
@@ -80,8 +76,6 @@ class MainFragment : Fragment() {
             .replace(R.id.fragment_container, settingsFragment)
             .addToBackStack(null)
             .commit()
-        //switch = view.findViewById(R.id.Wavyflag)
-
     }
 
 }
