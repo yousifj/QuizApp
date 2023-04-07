@@ -1,0 +1,53 @@
+package com.yousifj.flagsquizapp
+
+import android.app.AlertDialog
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Switch
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+
+private lateinit var switch: Switch
+
+var wavy = false
+class Settings : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_settings)
+        wavy = intent.getBooleanExtra("wavy", false)
+
+        // Create a new instance of the MainFragment
+        val mainFragment = SettingsFragment()
+        // Use a FragmentTransaction to add the fragment to the activity
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container, mainFragment)
+            .commit()
+    }
+    fun mainMenu(view: View){
+        val intent = Intent(this, MainMenuActivity::class.java)
+        intent.putExtra("wavy", wavy)
+        startActivity(intent)
+    }
+
+}
+
+class SettingsFragment : Fragment() {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_settings, container, false)
+        switch = view.findViewById<Switch>(R.id.Wavyflag)
+        switch.isChecked = wavy
+        switch.setOnCheckedChangeListener { _, isChecked ->
+            wavy = isChecked
+        }
+        return view
+    }
+
+}

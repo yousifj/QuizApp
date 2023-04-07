@@ -5,7 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:gravity="end">
+
+
+    <Button
+        android:id="@+id/btn_wheel"
+        android:layout_width="54dp"
+        android:layout_height="53dp"
+        android:alpha="1"
+        android:background="#33000000"
+        android:drawableTop="@drawable/wheel"
+        android:onClick="openSettings" />
 
 
     <TextView
@@ -15,6 +26,7 @@
         android:text="@string/welcome"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/purple_200"
+        android:paddingTop="0dp"
         android:textSize="90sp" />
 
     <ImageView
@@ -36,17 +48,7 @@
         android:onClick="showAlertDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-         />
-    <Button
-        android:id="@+id/settings_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/settings"
-         />
+
 
 
 </LinearLayout>

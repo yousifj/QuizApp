@@ -18,7 +18,7 @@ class EndScreen : AppCompatActivity() {
         text.text = getString(R.string.score_text, score)
     }
     fun mainMenu(view: View){
-        val intent = Intent(this, MainMenu::class.java)
+        val intent = Intent(this, MainMenuActivity::class.java)
         intent.putExtra("wavy", wavy)
         startActivity(intent)
     }
