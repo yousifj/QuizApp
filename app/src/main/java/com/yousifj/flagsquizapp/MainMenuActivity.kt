@@ -13,12 +13,10 @@ class MainMenuActivity : AppCompatActivity() {
     }
     fun startQuiz(view: View){
         val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("wavy", wavy)
         startActivity(intent)
     }
     fun openSettings(view: View) {
         val intent = Intent(this, Settings::class.java)
-        intent.putExtra("wavy", wavy)
         startActivity(intent)
     }
     //show alert when exit button is clicked

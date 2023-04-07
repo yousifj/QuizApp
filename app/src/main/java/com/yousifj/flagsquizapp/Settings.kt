@@ -1,6 +1,7 @@
 package com.yousifj.flagsquizapp
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,13 +14,18 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 
 private lateinit var switch: Switch
-
 var wavy = false
 class Settings : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-        wavy = intent.getBooleanExtra("wavy", false)
+        //retrieve sharedPref
+        val sharedPref = getSharedPreferences("myprefs", Context.MODE_PRIVATE)
+        if (sharedPref.contains("wavy")) {
+            // If the wavy exists retrieve the value
+            val currentWavyValue = sharedPref.getBoolean("wavy", false)
+            wavy = currentWavyValue
+        }
 
         // Create a new instance of the MainFragment
         val mainFragment = SettingsFragment()
@@ -30,7 +36,6 @@ class Settings : AppCompatActivity() {
     }
     fun mainMenu(view: View){
         val intent = Intent(this, MainMenuActivity::class.java)
-        intent.putExtra("wavy", wavy)
         startActivity(intent)
     }
 
@@ -46,8 +51,14 @@ class SettingsFragment : Fragment() {
         switch.isChecked = wavy
         switch.setOnCheckedChangeListener { _, isChecked ->
             wavy = isChecked
+            // Update the wavy value in the Shared Preferences
+            val sharedPref = requireContext().getSharedPreferences("myprefs", Context.MODE_PRIVATE)
+            val editor = sharedPref.edit()
+            editor.putBoolean("wavy", wavy)
+            editor.apply()
         }
         return view
     }
+
 
 }

@@ -1,6 +1,7 @@
 package com.yousifj.flagsquizapp
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.ContextMenu
@@ -29,8 +30,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //get type of flag from settings
-        wavy = intent.getBooleanExtra("wavy", false)
+        val sharedPref = getSharedPreferences("myprefs", Context.MODE_PRIVATE)
+        if (sharedPref.contains("wavy")) {
+            // If the wavy exists retrieve the value
+            val currentWavyValue = sharedPref.getBoolean("wavy", false)
+            wavy = currentWavyValue
+        }
+
         //select a random county
         val countryCode = getRandomISO3166()
         //display the flag

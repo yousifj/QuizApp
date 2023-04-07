@@ -8,18 +8,16 @@ import android.widget.TextView
 
 class EndScreen : AppCompatActivity() {
     private lateinit var text: TextView
-    private var wavy = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_end_screen)
-        wavy = intent.getBooleanExtra("wavy", false)
         val score = intent.getIntExtra("score", 0)
         text = findViewById(R.id.score)
         text.text = getString(R.string.score_text, score)
     }
     fun mainMenu(view: View){
         val intent = Intent(this, MainMenuActivity::class.java)
-        intent.putExtra("wavy", wavy)
         startActivity(intent)
     }
 }
