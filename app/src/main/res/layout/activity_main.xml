@@ -86,6 +86,12 @@
         android:layout_marginBottom="@dimen/quizButtonMargin"
         android:onClick="buttonClick"
         android:text="@string/restart" />
+    <Button
+        android:id="@+id/exit_button"
+        android:text="@string/restart"
+        android:onClick="showAlertDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 
 </LinearLayout>

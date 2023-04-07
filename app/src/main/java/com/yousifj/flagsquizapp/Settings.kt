@@ -21,7 +21,7 @@ class Settings : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         //retrieve sharedPref
-        val sharedPref = getSharedPreferences("myprefs", Context.MODE_PRIVATE)
+        val sharedPref = getSharedPreferences("appPrefs", Context.MODE_PRIVATE)
         if (sharedPref.contains("wavy")) {
             // If the wavy exists retrieve the value
             val currentWavyValue = sharedPref.getBoolean("wavy", false)
@@ -51,7 +51,6 @@ class Settings : AppCompatActivity() {
  * and it updates the wavy value in the Shared Preferences when the switch is toggled.
  */
 class SettingsFragment : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,7 +61,7 @@ class SettingsFragment : Fragment() {
         switch.setOnCheckedChangeListener { _, isChecked ->
             wavy = isChecked
             // Update the wavy value in the Shared Preferences
-            val sharedPref = requireContext().getSharedPreferences("myprefs", Context.MODE_PRIVATE)
+            val sharedPref = requireContext().getSharedPreferences("appPrefs", Context.MODE_PRIVATE)
             val editor = sharedPref.edit()
             editor.putBoolean("wavy", wavy)
             editor.apply()

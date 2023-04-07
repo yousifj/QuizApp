@@ -14,7 +14,9 @@
     <string name="no_country_selected">Nothing selected, country is %1$s</string>
     <string name="score_text">Your score is: %1$d</string>
     <string name="exitWarning">Are you sure you want to exit?</string>
+    <string name="restartWarning">Are you sure you want to restart?</string>
     <string name="exitTitle">Exit Application</string>
+    <string name="restartTitle">Restart Quiz</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="finished">You Finished</string>

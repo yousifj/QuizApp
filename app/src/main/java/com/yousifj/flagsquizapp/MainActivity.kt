@@ -1,6 +1,7 @@
 package com.yousifj.flagsquizapp
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val sharedPref = getSharedPreferences("myprefs", Context.MODE_PRIVATE)
+        val sharedPref = getSharedPreferences("appPrefs", Context.MODE_PRIVATE)
         if (sharedPref.contains("wavy")) {
             // If the wavy exists retrieve the value
             val currentWavyValue = sharedPref.getBoolean("wavy", false)
@@ -51,6 +52,28 @@ class MainActivity : AppCompatActivity() {
         //register the context menu
         val myView = findViewById<View>(R.id.activity_main)
         registerForContextMenu(myView)
+    }
+    /**
+     * Shows an alert dialog when the restart button is clicked.
+     * @param view The view that triggers the function.
+     * @return void
+     */
+    fun showAlertDialog(view: View) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(getString(R.string.restartTitle))
+        builder.setMessage(getString(R.string.restartWarning))
+        builder.setPositiveButton(getString(R.string.yes)) { _, _ ->
+            //Restart activity
+            val intent = Intent(this, this::class.java)
+            startActivity(intent)
+            finish()
+        }
+        builder.setNegativeButton(getString(R.string.no)) { dialog, _ ->
+            // close the alert dialog and do nothing in not confirmed
+            dialog.cancel()
+        }
+        builder.create().show()
+
     }
     /**
      * Initializes a context menu and inflates it with menu items.
