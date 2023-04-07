@@ -52,13 +52,24 @@ class MainActivity : AppCompatActivity() {
         val myView = findViewById<View>(R.id.activity_main)
         registerForContextMenu(myView)
     }
-
+    /**
+     * Initializes a context menu and inflates it with menu items.
+     * @param menu The context menu.
+     * @param v The view for the context menu.
+     * @param menuInfo information about the context menu.
+     * @return void
+     */
     override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
         super.onCreateContextMenu(menu, v, menuInfo)
         menuInflater.inflate(R.menu.my_context_menu, menu)
     }
-
+    /**
+     * Handles the selection of a context menu item.
+     * @param item The selected context menu item.
+     * @return True if the selected context menu item, else false.
+     */
     override fun onContextItemSelected(item: MenuItem): Boolean {
+        //if flat is clicked make the flag flat
         when (item.itemId) {
             R.id.flat -> {
                 var prevValue = wavy
@@ -67,6 +78,7 @@ class MainActivity : AppCompatActivity() {
                 wavy = prevValue
                 return true
             }
+            //if wavy is clicked make the flag wavy
             R.id.wavy -> {
                 var prevValue = wavy
                 wavy = true
@@ -79,8 +91,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-      * Function to setup a Listener for the multiple choose
-      * it will highlight the selected only
+     * Function to setup a Listener for the multiple choose
+     * it will highlight the selected only
+     * @return void
     */
     private fun listener() {
         var prevSelectedRadioButton: RadioButton? = null
@@ -105,7 +118,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //function that will get a flag of a country given the ISO3166 code of that country
+    /**
+     * function that will get a flag of a country using API call
+     * @param ISO 3166 code of that country
+     * @return void
+     */
     private fun getFlagImage(countryCode: String) {
         imageView = findViewById(R.id.flagImageView)
         var flagUrl  = ""
@@ -123,16 +140,29 @@ class MainActivity : AppCompatActivity() {
             .load(flagUrl)
             .into(imageView)
     }
-
+    /**
+     * Generates a random ISO 3166 country code.
+     * @return The random ISO 3166 country code in lowercase format.
+     */
     private fun getRandomISO3166(): String {
         val random = Random()
         val countryCode = Locale.getISOCountries()[random.nextInt(Locale.getISOCountries().size)]
         return countryCode.lowercase(Locale.ROOT)
     }
+    /**
+     * Retrieves the country name from the ISO 3166 code.
+     * @param countryCode The ISO 3166 country code.
+     * @return The country name.
+     */
     private fun getCountryNameFromISO3166(countryCode: String): String {
         return Locale("", countryCode).displayCountry
     }
-
+    /**
+     * Handles button clicks during a quiz.
+     * Checks Answer first then move to next question
+     * @param view The view that triggers the function.
+     * @return void
+     */
     fun buttonClick(view: View) {
         //if the 10 questions have been asked end the quiz by going to a new activity
         if(questionNum >= 10){
@@ -144,7 +174,13 @@ class MainActivity : AppCompatActivity() {
         driver()
         listener()
     }
-
+    /**
+     * Function responsible for the logic of quiz activity
+     * adjust the check button color the correct answer
+     * count questions answered and Score
+     * Display correct answer
+     * @return void
+     */
     private fun driver(){
         // confirm if the answer have been checked
         if (checkAnswer) {

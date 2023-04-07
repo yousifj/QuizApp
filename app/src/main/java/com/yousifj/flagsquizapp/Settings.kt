@@ -1,5 +1,6 @@
 package com.yousifj.flagsquizapp
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -34,13 +35,21 @@ class Settings : AppCompatActivity() {
             .add(R.id.fragment_container, mainFragment)
             .commit()
     }
+    /**
+     * Launches the main menu activity when a button is clicked
+     * @param view The view that triggers the function.
+     * @return void
+     */
     fun mainMenu(view: View){
         val intent = Intent(this, MainMenuActivity::class.java)
         startActivity(intent)
     }
 
 }
-
+/**
+ * A fragment that displays the app settings, it has a switch to toggle the wavy flag effect on/off.
+ * and it updates the wavy value in the Shared Preferences when the switch is toggled.
+ */
 class SettingsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,6 +68,5 @@ class SettingsFragment : Fragment() {
         }
         return view
     }
-
 
 }

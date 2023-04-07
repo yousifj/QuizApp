@@ -11,15 +11,29 @@ class MainMenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
     }
+    /**
+     * Starts a new quiz by opening the main activity when button is clicked.
+     * @param view The view that triggers the function.
+     * @return void
+     */
     fun startQuiz(view: View){
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
+    /**
+     * Opens the settings activity when button is clicked.
+     * @param view The view that triggers the function.
+     * @return void
+     */
     fun openSettings(view: View) {
         val intent = Intent(this, Settings::class.java)
         startActivity(intent)
     }
-    //show alert when exit button is clicked
+    /**
+     * Shows an alert dialog when the exit button is clicked.
+     * @param view The view that triggers the function.
+     * @return void
+     */
     fun showAlertDialog(view: View) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle(getString(R.string.exitTitle))
