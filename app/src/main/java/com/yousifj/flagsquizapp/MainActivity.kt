@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
         //if flat is clicked make the flag flat
         when (item.itemId) {
             R.id.flat -> {
-                var prevValue = wavy
+                val prevValue = wavy
                 wavy = false
                 getFlagImage(countryCode)
                 wavy = prevValue
@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
             }
             //if wavy is clicked make the flag wavy
             R.id.wavy -> {
-                var prevValue = wavy
+                val prevValue = wavy
                 wavy = true
                 getFlagImage(countryCode)
                 wavy = prevValue

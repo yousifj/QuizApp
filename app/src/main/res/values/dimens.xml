@@ -13,4 +13,5 @@
     <dimen name="radioButtonPadding">20dp</dimen>
     <dimen name="quizButtonMargin">10dp</dimen>
     <dimen name="radioButtonMargin">16dp</dimen>
+    <dimen name="endScreenTopMargin">200dp</dimen>
 </resources>

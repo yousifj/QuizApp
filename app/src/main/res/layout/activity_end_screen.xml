@@ -14,6 +14,7 @@
         android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/endScreenTopMargin"
         android:text="@string/finished"
         android:textSize="@dimen/textSize40"
         android:textStyle="bold"/>
@@ -29,7 +30,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="mainMenu"
-        android:text="@string/main_menu" />
+        android:text="@string/main_menu"
+        android:layout_margin="@dimen/radioButtonMargin"
+        style="@style/sButton"/>
 
 
 </LinearLayout>

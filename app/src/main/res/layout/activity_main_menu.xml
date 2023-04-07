@@ -36,15 +36,19 @@
         android:id="@+id/start"
         android:text="@string/start_quiz"
         android:onClick="startQuiz"
+        android:layout_margin="@dimen/radioButtonMargin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        style="@style/sButton"/>
 
     <Button
         android:id="@+id/exit_button"
         android:text="@string/exit"
         android:onClick="showAlertDialog"
+        android:layout_margin="@dimen/radioButtonMargin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        style="@style/sButton"/>
 
 
 
