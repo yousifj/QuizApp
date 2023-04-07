@@ -188,14 +188,15 @@ class MainActivity : AppCompatActivity() {
      */
     fun buttonClick(view: View) {
         //if the 10 questions have been asked end the quiz by going to a new activity
-        if(questionNum >= 10){
+        if(questionNum >= 10 && checkAnswer){
             val intent = Intent(this, EndScreen::class.java)
             intent.putExtra("score", score)
-            intent.putExtra("wavy", wavy)
             startActivity(intent)
+        }else{
+            driver()
+            listener()
         }
-        driver()
-        listener()
+
     }
     /**
      * Function responsible for the logic of quiz activity
