@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="parentPadding">16dp</dimen>
+    <dimen name="textSize24">24sp</dimen>
+    <dimen name="padding20">20dp</dimen>
+    <dimen name="textSize40">40sp</dimen>
+    <dimen name="welcomeTextSize">90sp</dimen>
+    <dimen name="welcomeImageHeight">150dp</dimen>
+    <dimen name="gearBackgroundSize">55dp</dimen>
+    <dimen name="textSize20">20sp</dimen>
+    <dimen name="flagWidth">380dp</dimen>
+    <dimen name="flagHeight">200dp</dimen>
+    <dimen name="radioButtonPadding">20dp</dimen>
+    <dimen name="quizButtonMargin">10dp</dimen>
+    <dimen name="radioButtonMargin">16dp</dimen>
+</resources>

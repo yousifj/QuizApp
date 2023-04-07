@@ -3,23 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="@dimen/parentPadding">
 
     <TextView
         android:id="@+id/settings_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/settings"
-        android:textSize="24sp"
+        android:textSize="@dimen/textSize24"
         android:textStyle="bold" />
 
-    <Switch
+    <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/Wavyflag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/padding20"
         android:text="@string/wavy_flag"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
+        />
 
 
 </LinearLayout>

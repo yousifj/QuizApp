@@ -14,13 +14,13 @@
         android:id="@+id/QuestionNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="@dimen/textSize20"
          />
 
     <ImageView
         android:id="@+id/flagImageView"
-        android:layout_width="380dp"
-        android:layout_height="200dp"
+        android:layout_width="@dimen/flagWidth"
+        android:layout_height="@dimen/flagHeight"
         android:contentDescription="@string/an_image_of_the_flag"
         app:srcCompat="@drawable/us" />
 
@@ -28,20 +28,20 @@
         android:id="@+id/CountryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp" />
+        android:textSize="@dimen/textSize20" />
 
     <TextView
         android:id="@+id/questionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/which_country_does_this_flag_belong_to"
-        android:textSize="20sp"/>
+        android:textSize="@dimen/textSize20"/>
 
     <RadioGroup
         android:id="@+id/optionsRadioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/radioButtonMargin"
         android:orientation="vertical"
         android:background="@color/cardview_light_background">
 
@@ -49,7 +49,7 @@
             android:id="@+id/option1RadioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
+            android:paddingLeft="@dimen/radioButtonPadding"
             android:button="@null"
             />
 
@@ -57,7 +57,7 @@
             android:id="@+id/option2RadioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
+            android:paddingLeft="@dimen/radioButtonPadding"
             android:button="@null"
             />
 
@@ -65,7 +65,7 @@
             android:id="@+id/option3RadioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
+            android:paddingLeft="@dimen/radioButtonPadding"
             android:button="@null"
             />
 
@@ -73,7 +73,7 @@
             android:id="@+id/option4RadioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
+            android:paddingLeft="@dimen/radioButtonPadding"
             android:button="@null"
             />
 
@@ -83,7 +83,7 @@
         android:id="@+id/Check_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="@dimen/quizButtonMargin"
         android:onClick="buttonClick"
         android:text="@string/restart" />
 

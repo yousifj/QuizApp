@@ -11,10 +11,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Switch
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 
-private lateinit var switch: Switch
 var wavy = false
 class Settings : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,12 +51,13 @@ class Settings : AppCompatActivity() {
  * and it updates the wavy value in the Shared Preferences when the switch is toggled.
  */
 class SettingsFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
-        switch = view.findViewById<Switch>(R.id.Wavyflag)
+        val switch = view.findViewById<SwitchCompat>(R.id.Wavyflag)
         switch.isChecked = wavy
         switch.setOnCheckedChangeListener { _, isChecked ->
             wavy = isChecked

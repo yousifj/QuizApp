@@ -11,4 +11,5 @@
     <color name="green">#00FF00</color>
     <color name="check_answer_color">#80D8FF</color>
     <color name="next_question_color">#FF6200EE</color>
+    <color name="transparentGearBackground">#33000000</color>
 </resources>
