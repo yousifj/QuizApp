@@ -1,6 +1,5 @@
 package com.yousifj.flagsquizapp
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -27,16 +26,15 @@ class MainActivity : AppCompatActivity() {
     private var wavy = false
     private var countryCode = "us"
     private var questionNum = 0
+    private var questionsNum = 10
     private var score = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val sharedPref = getSharedPreferences("appPrefs", Context.MODE_PRIVATE)
-        if (sharedPref.contains("wavy")) {
-            // If the wavy exists retrieve the value
-            val currentWavyValue = sharedPref.getBoolean("wavy", false)
-            wavy = currentWavyValue
-        }
+        // If the wavy exists retrieve the value
+        wavy = sharedPref.getBoolean("wavy", false)
+        questionsNum = sharedPref.getInt("questionsNum", 10)
 
         //select a random county
         val countryCode = getRandomISO3166()
@@ -188,7 +186,7 @@ class MainActivity : AppCompatActivity() {
      */
     fun buttonClick(view: View) {
         //if the 10 questions have been asked end the quiz by going to a new activity
-        if(questionNum >= 10 && checkAnswer){
+        if(questionNum >= questionsNum && checkAnswer){
             val intent = Intent(this, EndScreen::class.java)
             intent.putExtra("score", score)
             startActivity(intent)
@@ -276,7 +274,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         //update score
-        questionNumber.text = getString(R.string.question_score_text, questionNum, score)
+        questionNumber.text = getString(R.string.question_score_text, questionNum, questionsNum, score)
         //restart the radioGroup Listener
         radioGroup.setOnCheckedChangeListener(null)
     }

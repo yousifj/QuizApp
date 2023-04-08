@@ -1,32 +1,27 @@
 package com.yousifj.flagsquizapp
 
-import android.annotation.SuppressLint
-import android.app.AlertDialog
+
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Switch
+import android.text.*
+import android.view.*
+import android.widget.EditText
 import androidx.appcompat.widget.SwitchCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 
 var wavy = false
+var questionNum = 10
 class Settings : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         //retrieve sharedPref
         val sharedPref = getSharedPreferences("appPrefs", Context.MODE_PRIVATE)
-        if (sharedPref.contains("wavy")) {
-            // If the wavy exists retrieve the value
-            val currentWavyValue = sharedPref.getBoolean("wavy", false)
-            wavy = currentWavyValue
-        }
+        // If the wavy exists retrieve the value
+        wavy = sharedPref.getBoolean("wavy", false)
+        questionNum = sharedPref.getInt("questionsNum", 10)
 
         // Create a new instance of the MainFragment
         val mainFragment = SettingsFragment()
@@ -66,6 +61,23 @@ class SettingsFragment : Fragment() {
             editor.putBoolean("wavy", wavy)
             editor.apply()
         }
+        //get the number if questions
+        val integerInput = view.findViewById<EditText>(R.id.integer_input)
+        integerInput.setText(questionNum.toString())
+        integerInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val inputValue = s.toString().toIntOrNull()
+                inputValue?.let {
+                    val sharedPref = requireContext().getSharedPreferences("appPrefs", Context.MODE_PRIVATE)
+                    val editor = sharedPref.edit()
+                    editor.putInt("questionsNum", it)
+                    editor.apply()
+                }
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
         return view
     }
 

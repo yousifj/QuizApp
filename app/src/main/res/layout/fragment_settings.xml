@@ -20,6 +20,21 @@
         android:layout_marginTop="@dimen/padding20"
         android:text="@string/wavy_flag"
         />
+    <TextView
+        android:id="@+id/numOfQuestions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/number_of_questions"
+        android:textSize="@dimen/textSize24"
+        />
+    <EditText
+        android:id="@+id/integer_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="@string/enter_an_number_of_questions"
+        android:textSize="@dimen/textSize20"
+        />
 
 
 </LinearLayout>

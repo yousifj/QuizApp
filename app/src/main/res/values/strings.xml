@@ -10,7 +10,7 @@
     <string name="wavy_flag">Wavy flag</string>
     <string name="Next">Next</string>
     <string name="Check">Check</string>
-    <string name="question_score_text">QuestionNumber: %1$d/10\t\t\t\t\t\t\t\t\t Score: %2$d</string>
+    <string name="question_score_text">QuestionNumber: %1$d/%2$d\t\t\t\t\t\t\t\t\t Score: %3$d</string>
     <string name="no_country_selected">Nothing selected, country is %1$s</string>
     <string name="score_text">Your score is: %1$d</string>
     <string name="exitWarning">Are you sure you want to exit?</string>
@@ -22,6 +22,8 @@
     <string name="finished">You Finished</string>
     <string name="score">score</string>
     <string name="restart">restart</string>
+    <string name="number_of_questions">Number of Questions</string>
+    <string name="enter_an_number_of_questions">Enter an number of questions</string>
 
 
 </resources>
