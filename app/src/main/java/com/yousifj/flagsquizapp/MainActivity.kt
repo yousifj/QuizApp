@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import java.util.*
+import android.media.MediaPlayer
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +22,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var questionNumber: TextView
     private lateinit var button: Button
     private lateinit var radioGroup: RadioGroup
+    private lateinit var mediaPlayer : MediaPlayer
+
 
     //globe variables
     private var checkAnswer = true
@@ -35,7 +39,8 @@ class MainActivity : AppCompatActivity() {
         // If the wavy exists retrieve the value
         wavy = sharedPref.getBoolean("wavy", false)
         questionsNum = sharedPref.getInt("questionsNum", 10)
-
+        //set up player
+        mediaPlayer = MediaPlayer()
         //select a random county
         val countryCode = getRandomISO3166()
         //display the flag
@@ -50,6 +55,7 @@ class MainActivity : AppCompatActivity() {
         //register the context menu
         val myView = findViewById<View>(R.id.activity_main)
         registerForContextMenu(myView)
+
     }
     /**
      * Shows an alert dialog when the restart button is clicked.
@@ -64,6 +70,7 @@ class MainActivity : AppCompatActivity() {
             //Restart activity
             val intent = Intent(this, this::class.java)
             startActivity(intent)
+            mediaPlayer.reset()
             finish()
         }
         builder.setNegativeButton(getString(R.string.no)) { dialog, _ ->
@@ -189,12 +196,39 @@ class MainActivity : AppCompatActivity() {
         if(questionNum >= questionsNum && checkAnswer){
             val intent = Intent(this, EndScreen::class.java)
             intent.putExtra("score", score)
+            mediaPlayer.reset()
             startActivity(intent)
         }else{
             driver()
             listener()
         }
 
+    }
+    /**
+     * Function responsible for the playing the national anthems
+     * of country's
+     * @param countryCode
+     * @return void
+     */
+    private fun playSound(countryCode: String) {
+        //restart player for the new sound
+        if(mediaPlayer.isPlaying){
+            mediaPlayer.reset()
+        }
+        //use country code to make the correct link
+        val url = "https://nationalanthems.info/${countryCode}.mp3"
+        //play after it finishes downloading
+        try {
+            mediaPlayer.setDataSource(url)
+            mediaPlayer.setOnPreparedListener { player ->
+                player.start()
+            }
+            mediaPlayer.prepareAsync()
+        } catch (e: Exception) {
+            // Handle the exception
+            e.printStackTrace()
+            print("Sounds not found")
+        }
     }
     /**
      * Function responsible for the logic of quiz activity
@@ -229,7 +263,8 @@ class MainActivity : AppCompatActivity() {
             getFlagImage(countryCode)
             //clear correct answer
             text.text =""
-
+            // play sound
+            playSound(countryCode)
             // Get the reference to the RadioGroup in your layout
             val radioGroup = radioGroup
             // Assign the country names to each RadioButton in the RadioGroup
