@@ -5,15 +5,20 @@ import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
 import android.app.AlertDialog
 import android.content.Intent
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 
 class MainMenuActivity : AppCompatActivity() {
+    //MediaPlayer player
+    private lateinit var mediaPlayer: MediaPlayer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
+        mediaPlayer = MediaPlayer.create(this, R.raw.click)
+
     }
     /**
      * Starts Button animation and wait for animation to finish playing then start
@@ -22,6 +27,7 @@ class MainMenuActivity : AppCompatActivity() {
      * @return void
      */
     fun startQuiz(view: View) {
+        mediaPlayer.start()
         val button = view as Button
         val anim = AnimatorInflater.loadAnimator(this, R.animator.button_animation) as AnimatorSet
         anim.setTarget(button)
