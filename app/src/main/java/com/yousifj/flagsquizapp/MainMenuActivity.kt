@@ -1,10 +1,14 @@
 package com.yousifj.flagsquizapp
 
+import android.animation.Animator
+import android.animation.AnimatorInflater
+import android.animation.AnimatorSet
 import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 
 class MainMenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,14 +16,46 @@ class MainMenuActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main_menu)
     }
     /**
-     * Starts a new quiz by opening the main activity when button is clicked.
+     * Starts Button animation and wait for animation to finish playing then start
+     * a new quiz by opening the main activity when button is clicked.
      * @param view The view that triggers the function.
      * @return void
      */
-    fun startQuiz(view: View){
+    fun startQuiz(view: View) {
+        val button = view as Button
+        val anim = AnimatorInflater.loadAnimator(this, R.animator.button_animation) as AnimatorSet
+        anim.setTarget(button)
+
+        anim.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator) {
+                // animation started
+            }
+
+            override fun onAnimationEnd(animation: Animator) {
+                // animation ended, start activity
+                nextActivity()
+            }
+
+            override fun onAnimationCancel(animation: Animator) {
+                // animation canceled
+            }
+
+            override fun onAnimationRepeat(animation: Animator) {
+                // animation repeated
+            }
+        })
+
+        anim.start()
+    }
+    /**
+     * Go to the main activity when called.
+     * @return void
+     */
+    fun nextActivity(){
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
+
     /**
      * Opens the settings activity when button is clicked.
      * @param view The view that triggers the function.
