@@ -46,14 +46,15 @@ class MainMenuActivity : AppCompatActivity() , SensorEventListener{
      * @return void
      */
     fun startQuiz(view: View) {
+        //Play sound
         mediaPlayer.start()
+        //play animation using animator
         val button = view as Button
         val anim = AnimatorInflater.loadAnimator(this, R.animator.button_animation) as AnimatorSet
         anim.setTarget(button)
 
         anim.addListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator) {
-                // animation started
             }
 
             override fun onAnimationEnd(animation: Animator) {
@@ -62,11 +63,9 @@ class MainMenuActivity : AppCompatActivity() , SensorEventListener{
             }
 
             override fun onAnimationCancel(animation: Animator) {
-                // animation canceled
             }
 
             override fun onAnimationRepeat(animation: Animator) {
-                // animation repeated
             }
         })
 
@@ -160,7 +159,7 @@ class MainMenuActivity : AppCompatActivity() , SensorEventListener{
      * @return void
      */
     private fun onShakeDetected() {
-        // Your code to execute when a shake event is detected
+        // go to next Activity once
         if(!shaken){
             shaken= true
             nextActivity()
