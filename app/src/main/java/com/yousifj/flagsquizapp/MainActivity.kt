@@ -13,7 +13,8 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import java.util.*
 import android.media.MediaPlayer
-
+import android.os.Handler
+import android.os.Looper
 
 
 class MainActivity : AppCompatActivity() {
@@ -220,8 +221,9 @@ class MainActivity : AppCompatActivity() {
         //play after it finishes downloading
         try {
             mediaPlayer.setDataSource(url)
+            mediaPlayer.prepare()
             mediaPlayer.setOnPreparedListener { player ->
-                player.start()
+                Handler(Looper.getMainLooper()).postDelayed({ player.start() }, 2000)
             }
             mediaPlayer.prepareAsync()
         } catch (e: Exception) {

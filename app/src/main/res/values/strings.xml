@@ -28,5 +28,6 @@
     <string name="scaleY">scaleY</string>
     <string name="StartValue">1.0</string>
     <string name="EndValue">0.5</string>
+    <string name="shake">Click start or shake the phone to start</string>
 
 </resources>

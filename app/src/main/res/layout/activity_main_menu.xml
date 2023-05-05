@@ -25,6 +25,16 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/purple_200"
         android:textSize="@dimen/welcomeTextSize" />
+    <TextView
+        android:id="@+id/HowTOStartText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/shake"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:paddingBottom="@dimen/padding20"
+        android:textSize="@dimen/textSize20" />
 
     <ImageView
         android:id="@+id/imageView"
